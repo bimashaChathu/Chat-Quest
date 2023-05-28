@@ -105,10 +105,16 @@ function Signup()  {
                     "Content-type": "application/json"
                 },
             };
-            const { data } = await axios.post("/api/user", {
-                fname, lname, email, password, image
-            },
-                config
+            const { data } = await axios.post(
+              process.env.REACT_APP_BACKEND_URL + "/api/user",
+              {
+                fname,
+                lname,
+                email,
+                password,
+                image,
+              },
+              config
             );
             toast({
               title: "Registration Seccessful!",
@@ -119,7 +125,7 @@ function Signup()  {
             });
             localStorage.setItem("userInfo", JSON.stringify(data));
             setloading(false);
-            history.push("/chats")
+          history.push("/chats");
         } catch (error) {
             toast({
               title: "Error Occured!",
@@ -205,10 +211,9 @@ function Signup()  {
             </InputGroup>
           </FormControl>
 
-          <FormControl id="image" isRequired>
+          <FormControl id="image">
             <FormLabel>Upload Your Picture</FormLabel>
             <Input
-              required
               type="file"
               padding={1.5}
               accept="image/*"

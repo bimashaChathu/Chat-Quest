@@ -59,7 +59,7 @@ const Login = () => {
         };
 
         const { data } = await axios.post(
-          "/api/user/login",
+          process.env.REACT_APP_BACKEND_URL + "/api/user/login",
           { email, password },
           config
         );
@@ -74,7 +74,8 @@ const Login = () => {
         });
         localStorage.setItem("userInfo", JSON.stringify(data));
         setLoading(false);
-        history.push("/chats");
+        // history.push("/chats");
+        window.location.href = "/chats";
       } catch (error) {
         toast({
           title: "Error Occured!",
